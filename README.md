@@ -9,7 +9,9 @@ https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Trai
 
 * Para que funcione el sistema se necesitan todas las carpetas y archivos que se generan por la descarga del API de detección. La carpeta "utils" contiene dos archivos importantes para nuestra aplicación. Estos archivos son "label_map_util" y "visualization_utils". El segundo archivo fue modificado para nuestra aplicación por lo que si se descarga la versión original del API no funcionará el sistema. La modificación se debe a que para la aplicación se requiere retornar variables de la detección que por default no son entregados por el API ya que este solo visualiza la detección, y el sistema requiere manejar los datos de ubicación y clase.
 
-* La carpeta "inference_graph" es la carpeta que más espacio abarca ya que contiene el modelo del clasificador entrenado.
+* La carpeta "inference_graph" es la carpeta que más espacio abarca ya que contiene el modelo del clasificador de objetos.
+
+* El archivo "filename2.pkl" contiene el modelo del clasificador de velocidad.
 
 * Se necesita crear la carpeta "test_images" que contiene las imagenes con las que se probará el sistema. Dentro de ella existen dos carpetas, una para guardar las imagenes que servirán como GroundTruth para determinar la matriz de confusión de la detección y la otra para probar todo el sistema durante una trama de conducción. La carpeta con el GroundTruth debe contener un archivo .csv con las etiquetas y la carpeta de prueba debe contener un archivo .xls con la trama de velocidad almacenada durante la conducción. 
 * El script "Confusion_Matrix.py" sirve para determinar la matriz de confusión de la etapa de detección de señales.
