@@ -1,5 +1,5 @@
 # Conductor Imprudente o no?
-Este repositario contiene todos los archivos utilizados para crear un sistema que analiza de comportamiento de un conductor basado en detección de señales de tránsito utilizando Deep Learning. Lo que sigue es un pequeño tutorial para entender que arhivos son importantes y como utilizarlos. La columna vertebral del proyecto se basa en el API de detección de objectos de Tensor Flow para Windows. Este nos ayuda a entrenar un clasificador de multiples objetos utilizando herramientas de deep learning y posteriormente poder utilizarlo para aplicaciones en tiempo real. Es por esto que lo primero que se debe hacer es aprender a utilizar este API y después se procederá a explicar la aplicación que se le dió para la detección de señales de tránsito.
+Este repositario contiene todos los archivos utilizados para crear un sistema que analiza el comportamiento de un conductor basado en la detección de señales de tránsito utilizando Deep Learning y el análisis de velocidad. Lo que sigue es un pequeño tutorial para entender que arhivos son importantes y como utilizarlos. La columna vertebral del proyecto se basa en el API de detección de objectos de Tensor Flow para Windows. Este nos ayuda a entrenar un clasificador de multiples objetos utilizando herramientas de deep learning para posteriormente poder utilizarlo para aplicaciones en tiempo real. Es por esto que el primer paso es aprender a utilizar este API y después se procederá a explicar la aplicación que se le dió para la detección de señales de tránsito.
 
 NOTA: A manera de ayuda, el siguiente enlace direcciona a un tutorial con un proyecto similar que explica muy detalladamente la manera de usar el API de detección, con énfasis en el entrenamiento.
 
@@ -7,7 +7,7 @@ https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Trai
 
 # Como utilizar el Código
 
-* Para que funcione el sistema se necesitan todas las carpetas y archivos que se generan por la descarga del API de detección. La carpeta "utils" contiene dos archivos importantes para nuestra aplicación. Estos archivos son "label_map_util" y "visualization_utils". El segundo archivo fue modificado para nuestra aplicación por lo que si se descarga la versión original del API no funcionará el sistema. La modificación se debe a que para la aplicación se requiere retornar variables de la detección que por default no son entregados por el API ya que este solo visualiza la detección, y el sistema requiere manejar los datos de ubicación y clase.
+* Para que funcione el sistema se necesitan todas las carpetas y archivos que se generan por la descarga del API de detección. La carpeta "utils" contiene dos archivos importantes para nuestra aplicación. Estos archivos son "label_map_util" y "visualization_utils". El segundo archivo fue modificado para nuestra aplicación por lo que si se descarga la versión original del API no funcionará el sistema. La modificación se debe a que para la aplicación se requiere retornar variables de la detección que por default no son entregados por el API ya que éste solo visualiza la detección, y el sistema requiere manejar los datos de ubicación y clase.
 
 * La carpeta "inference_graph" es la carpeta que más espacio abarcará ya que contiene el modelo del clasificador de objetos entregado por el API de tensorflow.
 
@@ -22,11 +22,11 @@ Si se quiere ejecutar el código se debe considerar que el directorio por defect
 
 # Descripción del Sistema Propuesto
 
-Para cumplir con el objetivo de lograr determinar si un conductor se ha comportado de manera imprudente o no. Se ha decidido utilizar una cámara colocada sobre el panel frontal del vehículo mirando hacia la misma dirección del movimiento. De esta manera se busca poder observar los mismo que el conductor y asi poder detectar si el conductor al pasar por alguna señal de tránsito importante realizó la acción pertinente. La evaluación de la acción se basará en dos entradas, la primera es el tipo de señal detectada y la segunda es el cambio de velocidad durante la detección de la señal. A partir de estos dos datos de entrada, el sistema permite inferir si el comportamiento durante un tramo de conducción fue correcto o no y muestra en pantalla mensajes visuales con su resultado. 
+Para cumplir con el objetivo de lograr determinar si un conductor se ha comportado de manera imprudente o no. Se ha decidido utilizar una cámara colocada sobre el panel frontal del vehículo mirando hacia la misma dirección del movimiento. De esta manera se busca poder observar lo mismo que el conductor y así poder detectar si el conductor al pasar por alguna señal de tránsito importante realizó la acción pertinente. La evaluación de la acción se basará en dos entradas, la primera es el tipo de señal detectada y la segunda es el cambio de velocidad durante la detección de la señal. A partir de estos dos datos de entrada, el sistema permite inferir si el comportamiento durante un tramo de conducción fue correcto o no y muestra en pantalla mensajes visuales con su resultado. 
 
 Por razones de dificultad de implementación, las pruebas se realizaron en simulación. Se utilizó el entorno de GTAV para entrenar al clasificador y para probarlo. Los datos de velocidad fueron simulados utilizando un joystick.
 
-El sistema propuesto se basa en 4 bloques importantes que se ilustran en la Figura 1. Primero se encuentra la detección de señales que funciona como master para dar el paso al resto de etapas. Una vez se ha detectado una señal se comienza a grabar la velocidad hasta que se la deje de detectar y sea entregada una etiqueta con la clase de señal detectada. Durante la detección entra en funcionamiento el bloque de análisis de trama ya que el algoritmo de detección analiza una sola imagen pero el objectivo del sistema es analizar un comportamiento durante un tiempo de detección. Después, cuando ya se tenga la trama de velocidad, se activa el bloque de análisis de velocidad que entrega como salida una etiqueta que indica el cambio de velocidad realizado durante la detección. A partir de las dos etiquetas entregadas se activa el último bloque de inferencia que basado en una tabla de decisión, entrega una etiqueta de comportamiento bueno o malo y la presenta visualmente.
+El sistema propuesto se basa en 4 bloques importantes que se ilustran en la Figura 1. En el primer bloque se encuentra la detección de señales que funciona como máster y da paso al resto de etapas. Una vez que se ha detectado la señal y ésta ha sido observada en 3 frames consecutivos, el algoritmo entrega una etiqueta con la clase de la señal detectada y empieza a guardar los datos de velocidad hasta que deje de detectar la señal. Durante la detección entra en funcionamiento el bloque de análisis de trama ya que el algoritmo de detección analiza una sola imagen pero el objectivo del sistema es analizar un comportamiento durante un tiempo de detección. Después, con el vector de velocidad guardado, se activa el bloque de análisis de velocidad que entrega como salida una etiqueta que indica el cambio de velocidad realizado durante la detección. A partir de las dos etiquetas entregadas se activa el último bloque de inferencia que, basado en una tabla de decisión, entrega una etiqueta de comportamiento bueno o malo y la presenta visualmente.
 
 ![Esquema Propuesto](/Imagenes/esquema.JPG)
 
@@ -58,7 +58,20 @@ La Figura 3. muestra el resultado de ejecutar el script "Confusion_Matrix.py" co
 ![confusion_deteccion](/Imagenes/confusion_obj.jpg)
 
 ## Análisis de Velocidad
+El vector con los datos de velocidad está determinado por el bloque de detección de señales. Esto significa que durante el análisis de la conducción, el tamaño del vector de velocidad no se mantendrá constante. En consecuencia, el algoritmo para el análisis de velocidad debe ser independiente del tamaño del vector. 
 
+El algoritmo entrega como resultado una etiqueta que indica que sucedió con la velocidad durante la detección de la señal de tránsito, las etiquetas posibles son:
+* Aumenta: 
+* Disminuye
+* Detiene
+* Igual
+
+El esquema propuesto para el algoritmo de velocidad se muestra en la Figura 4. Una vez que se reciben los datos de velocidad, se aplica un algoritmo de clustering para caracterizar toda la señal, se decidió trabajar con algoritmos que reciban como conocimiento a priori el número de clusters. El algoritmo agrupará la señal en 3 clusters. Con los datos agrupados, se aplica una regresión lineal sobre cada grupo y se obtienen las pendientes de cada uno. Se ha entrenado una máquina de soporte vectorial multiclase (SVM) que recibe como vector de características los valores de las pendientes y determina a cual de las cuatro clases mencionadas pertenece.
+
+El SVM fue entrenado con 
+
+
+Se han implementado tres tipos diferentes de clustering: K-Means, Mini-batch KMeans y Hierarchical clustering (tipo agglomerative). 
 ## Análisis de Tramas de Imágenes
 
 La etapa de detección de imágenes no es suficiente para el análisis de comportamiento. Es necesario un análisis de toda una trama de detección. Para esto es necesario tener criterios para determinar en que momento empezar una trama y cuando terminarla. 
