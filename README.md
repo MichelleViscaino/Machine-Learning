@@ -9,7 +9,7 @@ https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Trai
 
 * Para que funcione el sistema se necesitan todas las carpetas y archivos que se generan por la descarga del API de detección. La carpeta "utils" contiene dos archivos importantes para nuestra aplicación. Estos archivos son "label_map_util" y "visualization_utils". El segundo archivo fue modificado para nuestra aplicación por lo que si se descarga la versión original del API no funcionará el sistema. La modificación se debe a que para la aplicación se requiere retornar variables de la detección que por default no son entregados por el API ya que este solo visualiza la detección, y el sistema requiere manejar los datos de ubicación y clase.
 
-* La carpeta "inference_graph" es la carpeta que más espacio abarca ya que contiene el modelo del clasificador de objetos.
+* La carpeta "inference_graph" es la carpeta que más espacio abarcará ya que contiene el modelo del clasificador de objetos entregado por el API de tensorflow.
 
 * El archivo "filename2.pkl" contiene el modelo del clasificador de velocidad.
 
@@ -73,9 +73,14 @@ Además se debe considerar que existen casos donde no se debe detectar una seña
 
 ## Inferencia del Comportamiento
 
+En la última etapa del sistema, se utilizan las etiquetas entregadas por la etapa de análisis de tramas y el análisis de velocidad. Basandose en la siguiente tabla, se asigna una tarjeta roja o verde a la acción del conductor.
+
 ![tabla](/Imagenes/tabla.jpg)
 
 # Resultados 
 
+El siguiente enlace direcciona a un video demostrativo. En este video se presenta la detección de señales en diferentes escenarios. En todos los casos se presenta una interfaz con mensajes sobre la pantalla que dependen de la señal detectada, la velocidad analizada y el comportamiento resultante.
+
 https://youtu.be/5kdcxp4PEm0
 
+A pesar de tener una existencia continua de falsos positivos, gracias al bloque de análisis de trama, se logra atenuar su influencia.
