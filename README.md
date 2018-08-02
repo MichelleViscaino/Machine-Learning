@@ -79,7 +79,7 @@ En la última etapa del sistema, se utilizan las etiquetas entregadas por la eta
 
 # Resultados 
 
-El siguiente enlace direcciona a un video demostrativo. En este video se presenta la detección de señales en diferentes escenarios. En todos los casos se presenta una interfaz con mensajes sobre la pantalla que dependen de la señal detectada, la velocidad analizada y el comportamiento resultante.
+El siguiente enlace direcciona a un video demostrativo. En este video se presenta la detección de señales en diferentes escenarios (buena y mala conducción). En todos los casos se presenta una interfaz con mensajes sobre la pantalla que dependen de la señal detectada, la velocidad analizada y el comportamiento resultante.
 
 https://youtu.be/5kdcxp4PEm0
 
