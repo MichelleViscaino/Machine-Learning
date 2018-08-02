@@ -42,18 +42,20 @@ Las señales o etiquetas con las que fue entrenado el clasificador fueron 8:
 * Señal vertical de ceda el Paso
 * Peatones
 
-Para su entrenamiento se utilizaron 5600 imágenes en total. El 80% de las imágenes se utilizaron para training y el 20% para test. Se utilizó una red preentrenada de tipo Faster R-CNN. La Figura 2. muestra el "Loss" histórico entregado por tensorflow durante su entrenamiento.
+Para su entrenamiento se utilizaron 5600 imágenes en total. El 80% de las imágenes se utilizaron para training y el 20% para test. Se utilizó una red preentrenada de tipo Faster R-CNN que cuenta con dos modulos. El primer módulo es una red que entrega regiones de interes y el segundo modulo es un clasificador que utiliza las regiones entregadas por el modulo anterior. El estractor de caracteristicas utilizado fue el "Inception v2". La Figura 2. muestra el "Loss" histórico entregado por tensorflow durante su entrenamiento.
 
 ![Entrenamiento](/Imagenes/18.JPG)
 
-# Images: 5600 in total (20% Test, 80% Train)
-# Labels for Train:
-[4908, 2533, 2419, 149, 816, 944, 545, 1790]
-# Labels for Test:
-[1427, 636, 695, 78, 233, 187, 142, 552]
+El número de etiqueta por clase dentro del entranamiento y el test fueron:
 
+* Labels for Train:
+Rojo: 4908, Amarillo: 2533, Verde: 2419, Ceda: 149, Cruce: 816, Cebra: 944, Pare: 545, Peatón: 1790
+* Labels for Test:
+Rojo: 1427, Amarillo: 636, Verde: 695, Ceda: 78, Cruce: 233, Cebra: 187, Pare: 142, Peatón: 552
 
-El entrenamiento se lo
+La Figura 3. muestra el resultado de ejecutar el script "Confusion_Matrix.py" con las imágenes de test. En la matriz resalta las equivocaciones de la red en detectar luz amarilla, esta casi siempre se confunde con luz verde. Esto debido a que el tipo de red no funciona bien para detectar objectos muy pequeños, y las imagenes con las que se testeo contienen varias tomas de semáforos a distancias muy alejadas. Es tambien por esta razón que muchas veces no se logra detectar los objetos y por esa razón la última fila de la matriz presenta falsos negativos.
+
+![confusion_deteccion](/Imagenes/confusion_obj.jpg)
 
 ## Análisis de Velocidad
 
