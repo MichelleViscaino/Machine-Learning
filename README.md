@@ -32,6 +32,10 @@ El sistema propuesto se basa en 4 bloques importantes que se ilustran en la Figu
 
 ## Detección de Señales 
 
+El clasificador escogido para esta etapa fue una red convolucional del tipo Faster R-CNN. Este tipo de red basada en regiones de interes es una de las arquitecturas más populares para aplicaciones que requieren tanto velocidad de detección como exactitud. En comparación con la también muy conocida YOLO, la Faster R-CNN tiene un mejor desempeño cuando se desea detectar objectos muy pequeños. Por esta razón es la mejor opción para nuestra aplicación en el caso de querer detectar señales como semáforos a distancias muy alejadas.
+
+El entrenamiento se lo
+
 ## Análisis de Velocidad
 
 ## Análisis de Tramas de Imágenes
