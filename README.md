@@ -26,7 +26,7 @@ Por razones de dificultad de implementación, las pruebas se realizaron en simul
 
 El sistema propuesto se basa en 4 bloques importantes que se ilustran en la Figura 1. Primero se encuentra la detección de señales que funciona como master para dar el paso al resto de etapas. Una vez se ha detectado una señal se comienza a grabar la velocidad hasta que se la deje de detectar y sea entregada una etiqueta con la clase de señal detectada. Durante la detección entra en funcionamiento el bloque de análisis de trama ya que el algoritmo de detección analiza una sola imagen pero el objectivo del sistema es analizar un comportamiento durante un tiempo de detección. Después, cuando ya se tenga la trama de velocidad, se activa el bloque de análisis de velocidad que entrega como salida una etiqueta que indica el cambio de velocidad realizado durante la detección. A partir de las dos etiquetas entregadas se activa el último bloque de inferencia que basado en una tabla de decisión, entrega una etiqueta de comportamiento bueno o malo y la presenta visualmente.
 
-![Esquema](/images/esquema.jpg)
+![Esquema](/imagenes/esquema.jpg)
 
 ## Detección de Señales 
 
