@@ -48,9 +48,9 @@ Para su entrenamiento se utilizaron 5600 imágenes en total. El 80% de las imág
 
 El número de etiqueta por clase dentro del entranamiento y el test fueron:
 
-* Labels for Train:
+* Labels Train:
 Rojo: 4908, Amarillo: 2533, Verde: 2419, Ceda: 149, Cruce: 816, Cebra: 944, Pare: 545, Peatón: 1790
-* Labels for Test:
+* Labels Test:
 Rojo: 1427, Amarillo: 636, Verde: 695, Ceda: 78, Cruce: 233, Cebra: 187, Pare: 142, Peatón: 552
 
 La Figura 3. muestra el resultado de ejecutar el script "Confusion_Matrix.py" con las imágenes de test. En la matriz resalta las equivocaciones de la red en detectar luz amarilla, esta casi siempre se confunde con luz verde. Esto debido a que el tipo de red no funciona bien para detectar objectos muy pequeños, y las imagenes con las que se testeo contienen varias tomas de semáforos a distancias muy alejadas. Es tambien por esta razón que muchas veces no se logra detectar los objetos y por esa razón la última fila de la matriz presenta falsos negativos.
