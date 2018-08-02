@@ -34,6 +34,25 @@ El sistema propuesto se basa en 4 bloques importantes que se ilustran en la Figu
 
 El clasificador escogido para esta etapa fue una red convolucional del tipo Faster R-CNN. Este tipo de red basada en regiones de interes es una de las arquitecturas más populares para aplicaciones que requieren tanto velocidad de detección como exactitud. En comparación con la también muy conocida YOLO, la Faster R-CNN tiene un mejor desempeño cuando se desea detectar objectos muy pequeños. Por esta razón es la mejor opción para nuestra aplicación en el caso de querer detectar señales como semáforos a distancias muy alejadas.
 
+Las señales o etiquetas con las que fue entrenado el clasificador fueron 8: 
+* Semaforos en Rojo, Amarillo y Verde
+* Señal vertical de Pare
+* Señal vertical de Cruce Peatonal
+* Señal de paso cebra pintada sobre el suelo
+* Señal vertical de ceda el Paso
+* Peatones
+
+Para su entrenamiento se utilizaron 5600 imágenes en total. El 80% de las imágenes se utilizaron para training y el 20% para test. Se utilizó una red preentrenada de tipo Faster R-CNN. La Figura 2. muestra el "Loss" histórico entregado por tensorflow durante su entrenamiento.
+
+![Entrenamiento](/Imagenes/18.JPG)
+
+# Images: 5600 in total (20% Test, 80% Train)
+# Labels for Train:
+[4908, 2533, 2419, 149, 816, 944, 545, 1790]
+# Labels for Test:
+[1427, 636, 695, 78, 233, 187, 142, 552]
+
+
 El entrenamiento se lo
 
 ## Análisis de Velocidad
