@@ -1,7 +1,9 @@
 # Conductor Imprudente o no?
 Este repositario contiene todos los archivos utilizados para crear un sistema que analiza de comportamiento de un conductor basado en detección de señales de tránsito utilizando Deep Learning. Lo que sigue es un pequeño tutorial para entender que arhivos son importantes y como utilizarlos. La columna vertebral del proyecto se basa en el API de detección de objectos de Tensor Flow para Windows. Este nos ayuda a entrenar un clasificador de multiples objetos utilizando herramientas de deep learning y posteriormente poder utilizarlo para aplicaciones en tiempo real. Es por esto que lo primero que se debe hacer es aprender a utilizar este API y después se procederá a explicar la aplicación que se le dió para la detección de señales de tránsito.
 
-NOTA: A manera de ayuda, el siguiente enlace direcciona a un tutorial con un proyecto similar que explica muy detalladamente la manera de usar el API de detección: https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10
+NOTA: A manera de ayuda, el siguiente enlace direcciona a un tutorial con un proyecto similar que explica muy detalladamente la manera de usar el API de detección, con énfasis en el entrenamiento.
+
+https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10
 
 # Como utilizar el Código
 
