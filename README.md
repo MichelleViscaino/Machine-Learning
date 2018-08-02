@@ -69,6 +69,7 @@ Para rechazar los falsos positivos, se añadio un contador que determina la cont
 En el caso de detectar más de una señal durante la trama, se añade prioridades a las distintas clases. Las clases con mayor prioridad son las luces de semáforo y pare y depues los cruces y ceda. De esta manera se determina una única detección al final de la trama, entregando como salida una única señal detectada.
 * Final:
 Para saber en que momento dejar de detectar y comenzar la etapa de análisis de velocidad se debe considerar que al dejar de detectar una señal aun puede aparecer otra con mayor prioridad (semáforo) a continuación por lo que se agrega un tiempo de espera. Si después de pasado un tiempo se dejo de detectar señales se procede a terminar la detección de esa trama.
+Además se debe considerar que existen casos donde no se debe detectar una señal después de la detección de otra. El ejemplo más claro es la detección de una luz roja después de analizado el comportamiento de la luz amarilla.
 
 ¿How to know if it is a true detection?
 	Box detected dimensions
