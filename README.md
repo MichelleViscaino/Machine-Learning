@@ -53,7 +53,7 @@ Rojo: 4908, Amarillo: 2533, Verde: 2419, Ceda: 149, Cruce: 816, Cebra: 944, Pare
 * Labels Test:
 Rojo: 1427, Amarillo: 636, Verde: 695, Ceda: 78, Cruce: 233, Cebra: 187, Pare: 142, Peatón: 552
 
-La Figura 3. muestra el resultado de ejecutar el script "Confusion_Matrix.py" con las imágenes de test. En la matriz resalta las equivocaciones de la red en detectar luz amarilla, esta casi siempre se confunde con luz verde. Esto debido a que el tipo de red no funciona bien para detectar objectos muy pequeños, y las imagenes con las que se testeo contienen varias tomas de semáforos a distancias muy alejadas. Es tambien por esta razón que muchas veces no se logra detectar los objetos y por esa razón la última fila de la matriz presenta falsos negativos.
+La Figura 3. muestra el resultado de ejecutar el script "Confusion_Matrix.py" con las imágenes de test. En la matriz resalta las equivocaciones de la red en detectar luz amarilla, esta casi siempre se confunde con luz verde. Esto debido a que el tipo de red no funciona bien para detectar objectos muy pequeños, y las imagenes con las que se testeo contienen varias tomas de semáforos a distancias muy alejadas. Es tambien por esta razón que muchas veces no se logra detectar los objetos, en consecuencia, la última fila de la matriz presenta falsos negativos.
 
 ![confusion_deteccion](/Imagenes/confusion_obj.jpg)
 
@@ -68,10 +68,16 @@ El algoritmo entrega como resultado una etiqueta que indica que sucedió con la 
 
 El esquema propuesto para el algoritmo de velocidad se muestra en la Figura 4. Una vez que se reciben los datos de velocidad, se aplica un algoritmo de clustering para caracterizar toda la señal, se decidió trabajar con algoritmos que reciban como conocimiento a priori el número de clusters. El algoritmo agrupará la señal en 3 clusters. Con los datos agrupados, se aplica una regresión lineal sobre cada grupo y se obtienen las pendientes de cada uno. Se ha entrenado una máquina de soporte vectorial multiclase (SVM) que recibe como vector de características los valores de las pendientes y determina a cual de las cuatro clases mencionadas pertenece.
 
-El SVM fue entrenado con 
+![Esquema Análisis de Velocidad](/Imagenes/SpeedA.PNG)
 
+El SVM fue entrenado con valores de pendientes de señales adquiridas con un joystick. El dataset tuvo un tamaño de 150 señales de cada clase. El training set constituyó el 80% del dataset, mientras que el testing set el 20%.
 
-Se han implementado tres tipos diferentes de clustering: K-Means, Mini-batch KMeans y Hierarchical clustering (tipo agglomerative). 
+Para la implementación de las etapas de clustering, regresión lineal y el SVM se empleó la libería "sklearn" de pyhton. Se decidió probar con tres tipos de clustering diferentes: K-Means, mini-batch Kmeans y hierarchical clustering (agglomerative) para evaluar el desempeño con cada uno. Dado que los datos no tienen alta dimensionalidad, los tres algoritmos funcionaron bien, sin embargo mini-batch KMeans presenta el menor tiempo de ejecución con resultados comparables a K-Means. Aglomerative clustering tuvo el mayor tiempo de ejecución de los tres.
+
+En la Figura 5. se muestra el resultado de ejecutar el archivo "ConfussionMatrix.py" que muestra el desempeño del clasificador. 
+
+![Matriz de confusión: análisis de velocidad](/Imagenes/MatrizconfusionSpeedA.PNG)
+
 ## Análisis de Tramas de Imágenes
 
 La etapa de detección de imágenes no es suficiente para el análisis de comportamiento. Es necesario un análisis de toda una trama de detección. Para esto es necesario tener criterios para determinar en que momento empezar una trama y cuando terminarla. 
